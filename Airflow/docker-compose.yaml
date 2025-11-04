@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow -d airflow"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+
+  airflow:
+    image: airflow-airflow:latest  
+    container_name: airflow-app
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres-db:5432/airflow
+      AIRFLOW__CORE__FERNET_KEY: "somethingrandomgenerated"
+      AIRFLOW__WEBSERVER__SECRET_KEY: "anothersecret"
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./data:/opt/airflow/data
+    command: >
+      bash -c "
+      echo 'Waiting for Postgres...' &&
+      until pg_isready -h postgres-db -p 5432; do
+        sleep 2;
+      done &&
+      echo 'Postgres ready!' &&
+      sleep 5 &&
+      airflow db init &&
+      airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com || true &&
+      exec airflow standalone"
+
+    restart: always
+
+volumes:
+  postgres_data:
