@@ -89,5 +89,5 @@ Dataset yang digunakan adalah hasil gabungan dari berbagai barcode dan QR code r
 
 ---
 
-> "This project is part of the final submission for Hacktiv8 Phase 2 Final Project (Barcode Detection and Decoding)."
+
 
