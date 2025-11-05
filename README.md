@@ -1,5 +1,5 @@
 <h3 style="text-align: center;">
-  <img src="https://readme-typing-svg.herokuapp.com/?font=Open+Sans&weight=700&color=666666&size=50&center=true&vCenter=true&width=1000&height=70&duration=3000&lines=BarSight:+a+Barcode+and+QRCode+Decoder">
+  <img src="https://readme-typing-svg.herokuapp.com/?font=Open+Sans&weight=700&color=666666&size=50&center=true&vCenter=true&width=1000&height=70&duration=3000&lines=Welcome+to+BarSight">
 </h3>
 
 ---
@@ -9,7 +9,7 @@
 </p>
 <h1 align="center">
 <br>
-Barcode & QR Code Detection and Decoding Pipeline
+BarSight: Barcode & QR Code Detection and Decoding App
 </h1>
 
 ---
