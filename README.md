@@ -76,6 +76,11 @@ Dataset yang digunakan adalah hasil gabungan dari berbagai barcode dan QR code r
 
 ---
 
+## Deployment
+[![Hugging Face Spaces](https://img.shields.io/badge/Spaces-Open_Demo-blue.svg)](https://huggingface.co/spaces/frsszn/BarSight)
+
+---
+
 ## Creator
 
 | Nama | Role |
